@@ -24,7 +24,7 @@ namespace ECommerce.DataAccess.Repository
                 
             }
 
-            
+
         }
     }
 }

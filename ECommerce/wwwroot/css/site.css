@@ -133,6 +133,36 @@ img {
     background: #fbfafd;
 }
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+    font-size: 15px;
+    
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #3e8760;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+
+.dropdown-content a:hover {
+    background-color: #6bbe92;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+    transition: .3s;
+    
+    min-width: 100px;
+
+
+}
+
 
 a.navbar-brand {
     white-space: normal;
@@ -140,6 +170,7 @@ a.navbar-brand {
     font-size: xx-large;
     text-align: center;
     word-break: break-all;
+    border-radius: 25px;
 }
 
 /* Provide sufficient contrast against white background */
@@ -204,6 +235,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
+
 }
 
 p {
@@ -227,6 +259,12 @@ ul {
     font-family: 'Nunito', sans-serif;
 }
 /*Backgrounds*/
+.bg-navbar2 {
+    background: -webkit-linear-gradient(150deg, #6bbe92 60%, #252152 60%);
+    background: -o-linear-gradient(150deg, #6bbe92 60%, #252152 60%);
+    background: -moz-linear-gradient(150deg, #6bbe92 60%, #252152 60%);
+    background: linear-gradient(110deg, #6bbe92 40%, #008cba 60%);
+}
 .bg-navbar {
     background: -webkit-linear-gradient(110deg, #e9a8a6 60%, #252152 60%);
     background: -o-linear-gradient(110deg, #e9a8a6 60%, #252152 60%);
@@ -238,5 +276,142 @@ ul {
     background: -webkit-linear-gradient(110deg, #252152 60%, #e9a8a6 60%);
     background: -o-linear-gradient(110deg, #252152 60%, #e9a8a6 60%);
     background: -moz-linear-gradient(110deg, #252152 60%, #e9a8a6 60%);
-    background: linear-gradient(110deg, #252152 60%, #e9a8a6 60%);
+    background: linear-gradient(110deg, #6bbe92 40%, #008cba 60%);
 }
+
+/*NEW STYLES HERE*/
+* {
+    box-sizing: border-box;
+}
+
+
+/* NEW STYLES HERE 2 */
+
+
+
+a {
+    text-decoration: none;
+}
+
+
+.box {
+    position: relative;
+    vertical-align: middle;
+    color: #6bbe92;
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    transition: 0.5s;
+    padding: 0 20px;
+    cursor: pointer;
+    border: 2px solid #008cba;
+    -webkit-transition: 0.5s;
+}
+
+.box:hover {
+    border: 2px solid rgba(0,160,80,0);
+    color: #FFF;
+}
+
+.box::before, .box::after {
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    -webkit-transform: scale(0);
+    transition: 0.5s;
+}
+
+
+
+.bar::before {
+    border-bottom: 3px solid #FFF;
+    border-left: 3px solid #FFF;
+    -webkit-transform-origin: 100% 0%;
+}
+
+.bar::after {
+    border-top: 3px solid #FFF;
+    border-right: 3px solid #FFF;
+    -webkit-transform-origin: 0% 100%;
+}
+
+
+.box:hover::after, .box:hover::before {
+    -webkit-transform: scale(1);
+}
+
+.link {
+    line-height: 1em;
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    width: 300px;
+    height: 50px;
+    font-family: "Open Sans","Roboto",Arial,sans-serif;
+    text-align: right;
+}
+
+.link > a {
+    text-decoration: none;
+    color: #FF0;
+}
+
+
+/* arama kutusu */
+
+.search-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #e5e5e5;
+    height: 40px;
+    border-radius: 40px;
+    padding: 10px;
+}
+.search-box:hover > .search-txt {
+    width: 120px;
+    padding: 0 6px;
+
+}
+.search-box:hover > .search-btn {
+    background: white;
+
+}
+.search-btn {
+    color: #e84118;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #6bbe92;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+
+
+}
+.search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    
+    padding: 0px;
+    color: white;
+    font-size: 16px;
+    transition: 0.5s;
+    line-height: 30px;
+    width: 0px;
+
+
+}
+
+

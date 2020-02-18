@@ -12,37 +12,71 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-navbar2 border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ECommerce</a>
+                @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">E-Ticaret Projesi</a>*@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <li class="nav-item  ">
+                            <a class="nav-link text-white dropbtn" style="font-size: 15px" role="button" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
+
+
+                        <li class="dropdown">
+
+                            <span href="javascript:void(0)" class="nav-link dropdown-toggle text-white dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Ürün Yönetimi</span>
+                            <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-white" asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriler</a>
+                                <a class="dropdown-item text-white" asp-area="" asp-controller="" asp-action="">Ürünler</a>
+
                             </div>
                         </li>
+                        <li class="dropdown">
+                            <span href="javascript:void(0)" class="nav-link dropdown-toggle text-white dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kullanıcı / Şirket</span>
+                            <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-white" asp-area="" asp-controller="" asp-action="">Kullanıcılar</a>
+                                <a class="dropdown-item text-white" asp-area="" asp-controller="" asp-action="">Şirketer</a>
+
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white dropbtn" style="font-size: 15px" role="button" asp-area="" asp-controller="Home" asp-action="Index">Siparişler</a>
+                        </li>
+                        <li style="color:white;">
+                            <a asp-area="" asp-controller="" asp-action="" class="nav-link">
+
+                                <i class="fas fa-shopping-cart"></i> &nbsp; (0) @*count eklenecek*@
+                            </a>
+                        </li>
+                        
+                        <div class="search-box">
+                            <input class="search-txt" type="text" name="" placeholder="Ara" />
+
+                                <i class="fas fa-search"></i>
+
+                            @*<a asp-area="" asp-controller="" asp-action="" class="nav-link">
+
+                                <i class="fas fa-search"></i>
+
+                            </a>*@
+
+
+
+                        </div>
+                        
                     </ul>
                 </div>
             </div>
         </nav>
+        
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -50,9 +84,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-white-50 bg-primary">
-        <div class="container">
-            &copy; 2020 - ECommerce
+    <footer class="border-top footer text-white-50 bg-footer " style="background-color: #6bbe92">
+        <div class="container text-white">
+            &copy; 2020 - E-Ticaret
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
