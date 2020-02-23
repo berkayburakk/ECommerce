@@ -11,7 +11,7 @@ namespace ECommerce.Models
         [Key]
         public int Id { get; set; }
 
-        [DisplayName("Category Name")]
+        [DisplayName("Kategori Adı")]
         [Required]
         [MaxLength(30)]
         public string Name { get; set; }
