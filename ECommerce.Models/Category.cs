@@ -15,6 +15,8 @@ namespace ECommerce.Models
         [Required]
         [MaxLength(30)]
         public string Name { get; set; }
+        public List<Product> Products{ get; set; }
+        public List<SubCategory> SubCategories { get; set; }
 
     }
 }

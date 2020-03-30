@@ -28,6 +28,12 @@
 
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Product\Upsert.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
     <ProjectReference Include="..\ECommerce.DataAccess\ECommerce.DataAccess.csproj" />
     <ProjectReference Include="..\ECommerce.Models\ECommerce.Models.csproj" />
     <ProjectReference Include="..\ECommerce.Utility\ECommerce.Utility.csproj" />
