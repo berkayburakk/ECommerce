@@ -10,13 +10,11 @@ namespace ECommerce.Models
     {
         [Key]
         public int Id { get; set; }
-
         [DisplayName("Kategori Adı")]
         [Required]
-        [MaxLength(30)]
+        [MaxLength(50)]
         public string Name { get; set; }
-        public List<Product> Products{ get; set; }
-        public List<SubCategory> SubCategories { get; set; }
+        
 
     }
 }

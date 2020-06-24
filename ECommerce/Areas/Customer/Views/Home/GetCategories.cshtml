@@ -1,327 +1,45 @@
-﻿@model IEnumerable<Category>
+﻿@*@model IEnumerable<Category>*@
+@model IEnumerable<Product>
+
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<input class="variation" id="bluepurple" type="radio" value="1" name="color" checked="checked" /><label for="bluepurple"></label>
-<input class="variation" id="sunset" type="radio" value="2" name="color" /><label for="sunset"></label>
-<input class="variation"
-       id="godiva" type="radio" value="3" name="color" /><label for="godiva"></label>
-<input class="variation" id="dark" type="radio" value="4" name="color" /><label for="dark"></label>
-<input class="variation" id="pinkaru" type="radio" value="5" name="color" /><label for="pinkaru"></label>
-<main>
-        
-    <div class="filter-section__wrapper" @*style="background-color: gray"*@>
-        @*<ul class="list-group">
-            @foreach (var item in Model)
-            {
-                <li class="list-group-item">
-                    <i class="fas fa-angle-double-right"></i>
-                    <a class="box" asp-area="Customer" asp-controller="Category" asp-action="GetAll" asp-route-id="@item.Id">
-                        @item.Name
-                    </a>
-                </li>
-            }
 
-        </ul>*@
-        <section class="filter-section">
-            <div class="filters">   
-                <ul class="list-group">
-                    @foreach (var item in Model)
-                    {
-                        <div class="filters__item">
-                            <li class="list-group-item">
-                                <i class="fas fa-angle-double-right"></i>
-                                <a class="box" asp-area="Customer" asp-controller="Category" asp-action="GetAll" asp-route-id="@item.Id">
-                                    @item.Name
-                                </a>
-                            </li>
+<div class="container">
+    <div class="card-list row pb-3 backgroundWhite">
+        @foreach (var product in Model)
+        {
+
+            <div class="col-lg-3 col-md-6">
+                <div class="row p-2">
+                    <div class="col-12  p-1" style="border-radius: 5px;">
+                        <div class="card" style="border: 0px;">
+                            <img src="@product.ImageUrl" class="card-img-top rounded" />
+                            <div class="pl-1">
+                                <p class="card-title h5"><b style="color: #2c3e50">@product.Title</b></p>
+                                <p class="card-title ">Yazar: <b class="text-primary"> @product.Author </b></p>
+                            </div>
+                            <div style="padding-left: 5px;">
+                                <p>Ürün Fiyati: <b class=""> @product.Price ₺</b></p>
+                            </div>
+
+                            <div>
+                                <a asp-action="Details" class="btn btn-primary form-control" asp-route-id="@product.Id">Detaylar</a>
+                            </div>
+
                         </div>
 
-                    }
-                </ul>
+                    </div>
+                </div>
             </div>
+        }
+    </div>
+</div>
 
-        </section>
-    </div>
-    <section class="results-section results--grid" @*style="background-color:aquamarine"*@>
-        <div class="profile">
-            <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Doggo" /></div>
-            <div class="profile__info">
-                <h3>Doggo Dogg</h3>
-                <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Type</p>
-                <h5 class="profile__stats__info">Puppy</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Size</p>
-                <h5>Medium</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Weight</p>
-                <h5 class="profile__stats__info">45 lbs</h5>
-            </div>
-            <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-        </div>
-        <div class="profile">
-            <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Doggo" /></div>
-            <div class="profile__info">
-                <h3>Doggo Dogg</h3>
-                <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Type</p>
-                <h5 class="profile__stats__info">Puppy</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Size</p>
-                <h5>Medium</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Weight</p>
-                <h5 class="profile__stats__info">45 lbs</h5>
-            </div>
-            <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-        </div>
-        <div class="profile">
-            <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Doggo" /></div>
-            <div class="profile__info">
-                <h3>Doggo Dogg</h3>
-                <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Type</p>
-                <h5 class="profile__stats__info">Puppy</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Size</p>
-                <h5>Medium</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Weight</p>
-                <h5 class="profile__stats__info">45 lbs</h5>
-            </div>
-            <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-        </div>
-        <div class="profile">
-            <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Doggo" /></div>
-            <div class="profile__info">
-                <h3>Doggo Dogg</h3>
-                <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Type</p>
-                <h5 class="profile__stats__info">Puppy</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Size</p>
-                <h5>Medium</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Weight</p>
-                <h5 class="profile__stats__info">45 lbs</h5>
-            </div>
-            <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-        </div>
-        <div class="profile">
-            <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Doggo" /></div>
-            <div class="profile__info">
-                <h3>Doggo Dogg</h3>
-                <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Type</p>
-                <h5 class="profile__stats__info">Puppy</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Size</p>
-                <h5>Medium</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Weight</p>
-                <h5 class="profile__stats__info">45 lbs</h5>
-            </div>
-            <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-        </div>
-        <div class="profile">
-            <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Doggo" /></div>
-            <div class="profile__info">
-                <h3>Doggo Dogg</h3>
-                <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Type</p>
-                <h5 class="profile__stats__info">Puppy</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Size</p>
-                <h5>Medium</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Weight</p>
-                <h5 class="profile__stats__info">45 lbs</h5>
-            </div>
-            <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-        </div>
-        <div class="profile">
-            <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Doggo" /></div>
-            <div class="profile__info">
-                <h3>Doggo Dogg</h3>
-                <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Type</p>
-                <h5 class="profile__stats__info">Puppy</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Size</p>
-                <h5>Medium</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Weight</p>
-                <h5 class="profile__stats__info">45 lbs</h5>
-            </div>
-            <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-        </div>
-        <div class="profile">
-            <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Doggo" /></div>
-            <div class="profile__info">
-                <h3>Doggo Dogg</h3>
-                <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Type</p>
-                <h5 class="profile__stats__info">Puppy</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Size</p>
-                <h5>Medium</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Weight</p>
-                <h5 class="profile__stats__info">45 lbs</h5>
-            </div>
-            <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-        </div>
-        <div class="profile">
-            <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Doggo" /></div>
-            <div class="profile__info">
-                <h3>Doggo Dogg</h3>
-                <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Type</p>
-                <h5 class="profile__stats__info">Puppy</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Size</p>
-                <h5>Medium</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Weight</p>
-                <h5 class="profile__stats__info">45 lbs</h5>
-            </div>
-            <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-        </div>
-        <div class="profile">
-            <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png" alt="Doggo" /></div>
-            <div class="profile__info">
-                <h3>Doggo Dogg</h3>
-                <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Type</p>
-                <h5 class="profile__stats__info">Puppy</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Size</p>
-                <h5>Medium</h5>
-            </div>
-            <div class="profile__stats">
-                <p class="profile__stats__title">Weight</p>
-                <h5 class="profile__stats__info">45 lbs</h5>
-            </div>
-            <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-    </div>
-    <div class="profile">
-        <div class="profile__image"><img src="~/images/fortune.png" alt="Doggo" /></div>
-        <div class="profile__info">
-            <h3>Doggo Dogg</h3>
-            <p class="profile__info__extra">A very good boi that loves playing fetch and ice-cream! Gentle with everyone. Scared of the rain.</p>
-        </div>
-        <div class="profile__stats">
-            <p class="profile__stats__title">Type</p>
-            <h5 class="profile__stats__info">Puppy</h5>
-        </div>
-        <div class="profile__stats">
-            <p class="profile__stats__title">Size</p>
-            <h5>Medium</h5>
-        </div>
-        <div class="profile__stats">
-            <p class="profile__stats__title">Weight</p>
-            <h5 class="profile__stats__info">45 lbs</h5>
-        </div>
-        <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
-    </div>
-
-    </section>
-</main>
 
 @section Scripts
 {
     <script src=""></script>
 }
-@*<div id="content" class="w-80" style=" margin-left: 10%; margin-right: 10%">
-            <div class="row" >
-                <div class="col-md-3" >
-                    <ul class="list-group">
-                        @foreach (var item in Model)
-                        {
-                            <li class="list-group-item">
-                                <i class="fas fa-angle-double-right"></i>
-                                <a class="box" asp-area="Customer" asp-controller="Category" asp-action="GetAll" asp-route-id="@item.Id">
-                                    @item.Name
-                                </a>
-                            </li>
-                        }
-
-                    </ul>
-
-                </div>
-                <div class="col-md-9 pull-right">
-                    <div class="card-deck">
-                        <div class="card">
-                            <img src="https://img-trendyol.mncdn.com/Assets/ProductImages/oa/53/3607033/4/6954176835628_2_org.jpg" />
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-            </div>
-
-    </div>*@

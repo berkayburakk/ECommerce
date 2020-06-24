@@ -12,14 +12,14 @@ function loadDataTable() {
             "url": "/Admin/Product/GetAll"
         },
         "columns": [
-            { "data": "name", "width": "15%" },
-            { "data": "description", "width": "15%" },
+            { "data": "title", "width": "15%" },
+            { "data": "isbn", "width": "15%" },
             { "data": "price", "width": "15%" },
-            { "data": "discountprice", "width": "15%" }, 
+            { "data": "author", "width": "15%" },
             { "data": "category.name", "width": "15%" },
             {
                 "data": "id",
-                "render": function(data) {
+                "render": function (data) {
                     return `
                  <div class="text-center">
                      <a href="/Admin/Product/Upsert/${data}" class="btn btn-success text-white" style="cursor: pointer">
@@ -41,8 +41,8 @@ function loadDataTable() {
 function Delete(url) {
 
     swal({
-        title: "Are you sure you want to Delete?",
-        text: "You will not be able to restore the data!",
+        title: "Silmek istediğinize emin misiniz?",
+        text: "Verileriniz geri gelmeyecek!",
         icon: "warning",
         buttons: true,
         dangerMode: true
@@ -52,7 +52,7 @@ function Delete(url) {
             $.ajax({
                 type: "DELETE",
                 url: url,
-                success: function(data) {
+                success: function (data) {
                     if (data.success) {
                         toastr.success(data.message);
                         dataTable.ajax.reload();

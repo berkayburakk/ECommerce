@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using ECommerce.DataAccess.Repository.IRepository;
+using ECommerce.Models;
 using ECommerce.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,14 +22,15 @@ namespace ECommerce.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
+            return View(productList);
         }
 
 
         [Route("")]
         public PartialViewResult GetCategories()
         {
-            return PartialView(_unitOfWork.Category.GetAll());
+            return PartialView(_unitOfWork.Product.GetAll());
 
         }
         public IActionResult Privacy()

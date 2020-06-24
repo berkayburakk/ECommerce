@@ -4,6 +4,8 @@ using System.Linq;
 using ECommerce.DataAccess.Repository.IRepository;
 using ECommerce.Models;
 using ECommerce.Models.ViewModels;
+using ECommerce.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace ECommerce.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -33,12 +35,12 @@ namespace ECommerce.Areas.Admin.Controllers
             ProductVM productVM = new ProductVM()
             {
                 Product = new Product(),
-                CategoryList = _unitOfWork.Category.GetAll().Select(i=>new SelectListItem
+                CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
                 }),
-                SubCategoryList = _unitOfWork.SubCategory.GetAll().Select(i => new SelectListItem
+                CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
@@ -51,7 +53,7 @@ namespace ECommerce.Areas.Admin.Controllers
                 return View(productVM);
             }
 
-            productVM.Product= _unitOfWork.Product.Get(id.GetValueOrDefault());
+            productVM.Product = _unitOfWork.Product.Get(id.GetValueOrDefault());
             if (productVM.Product == null)
             {
                 return NotFound();
@@ -76,7 +78,7 @@ namespace ECommerce.Areas.Admin.Controllers
                     if (productVM.Product.ImageUrl != null)
                     {
                         //bu düzenleme kısmı eski resmi remove etmek gerekli
-                        
+
 
                         var imagePath = Path.Combine(webRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
                         if (System.IO.File.Exists(imagePath))
@@ -85,16 +87,16 @@ namespace ECommerce.Areas.Admin.Controllers
                         }
                     }
 
-                    using (var fileStreams = new FileStream(Path.Combine(uploads,fileName+extension),FileMode.Create))
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
                         files[0].CopyTo(fileStreams);
-                        
+
                     }
                     productVM.Product.ImageUrl = @"\images\products\" + fileName + extension;
                 }
                 else
                 {
-                    // update when they dont change image
+                    //Resim değişmediğinde update bu şekilde
                     if (productVM.Product.Id != 0)
                     {
                         Product objFromDb = _unitOfWork.Product.Get(productVM.Product.Id);
@@ -103,15 +105,15 @@ namespace ECommerce.Areas.Admin.Controllers
                 }
                 if (productVM.Product.Id == 0)
                 {
-                    _unitOfWork.Product.Add(productVM.Product); // add kısmında save unitofwork interfacesinde yapılır
+                    _unitOfWork.Product.Add(productVM.Product); 
                     _unitOfWork.Save();
                 }
                 else
                 {
-                    _unitOfWork.Product.Update(productVM.Product); //update işleminde save kısmı update metodu içindedir.
+                    _unitOfWork.Product.Update(productVM.Product); 
                 }
                 _unitOfWork.Save();
-                // nameof(Index) ile "Index" ayni
+                
                 return RedirectToAction(nameof(Index));
             }
             else
@@ -121,11 +123,11 @@ namespace ECommerce.Areas.Admin.Controllers
                     Text = i.Name,
                     Value = i.Id.ToString()
                 });
-                productVM.SubCategoryList = _unitOfWork.SubCategory.GetAll().Select(i => new SelectListItem
+                productVM.CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
-                }); 
+                });
                 if (productVM.Product.Id != 0)
                 {
                     productVM.Product = _unitOfWork.Product.Get(productVM.Product.Id);
@@ -140,7 +142,7 @@ namespace ECommerce.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var allObj = _unitOfWork.Product.GetAll(includeProperties:"Category,SubCategory");
+            var allObj = _unitOfWork.Product.GetAll(includeProperties: "Category,CoverType");
 
             return Json(new { data = allObj });
         }
@@ -152,7 +154,7 @@ namespace ECommerce.Areas.Admin.Controllers
             var objFromDb = _unitOfWork.Product.Get(id);
             if (objFromDb == null)
             {
-                return Json(new {success = false, message = "Error while deleting"});
+                return Json(new { success = false, message = "Silerken bir hata oluştu" });
             }
             string webRootPath = _hostEnvironment.WebRootPath;
 
@@ -163,7 +165,7 @@ namespace ECommerce.Areas.Admin.Controllers
             }
             _unitOfWork.Product.Remove(objFromDb);
             _unitOfWork.Save();
-            return Json(new { success = true, message = "Delete Successfull" });
+            return Json(new { success = true, message = "Silme işlemi başarılı." });
 
         }
 

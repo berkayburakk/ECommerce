@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce.Models
@@ -8,31 +9,34 @@ namespace ECommerce.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        [DisplayName("Başlık")]
+        public string Title { get; set; }
+        [DisplayName("Açıklama")]
         public string Description { get; set; }
         [Required]
+        [DisplayName("ISBN Numarası")]
+        public string ISBN { get; set; }
+        [Required]
+        [DisplayName("Yazar")]
+        public string Author { get; set; }
+        [Required]
         [Range(1, 10000)]
+        [DisplayName("Fiyat")]
         public double Price { get; set; }
-        [Range(1, 10000)]
-        public double? DiscountPrice { get; set; }
-        public bool? DiscountAvailable { get; set; }
-        [Required]
-        public int Stock { get; set; }
-        [Required]
         public string ImageUrl { get; set; }
-
-        public bool IsApproved { get; set; }
 
         [Required]
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
-        public int SubCategoryId { get; set; }
 
-        [ForeignKey("SubCategoryId")]
-        public SubCategory SubCategory { get; set; }
+        [Required]
+        public int CoverTypeId { get; set; }
 
+        [ForeignKey("CoverTypeId")]
+        [DisplayName("Kapak Tipi")]
+        public CoverType CoverType { get; set; }
 
     }
 }

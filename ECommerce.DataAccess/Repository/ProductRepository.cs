@@ -1,5 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using ECommerce.DataAccess.Data;
+using ECommerce.DataAccess.Repository;
 using ECommerce.DataAccess.Repository.IRepository;
 using ECommerce.Models;
 
@@ -24,15 +28,15 @@ namespace ECommerce.DataAccess.Repository
                 {
                     objFromDb.ImageUrl = product.ImageUrl;
                 }
-                objFromDb.Name = product.Name;
-                objFromDb.Description = product.Description;
+
+                objFromDb.ISBN = product.ISBN;
                 objFromDb.Price = product.Price;
+                objFromDb.Title = product.Title;
+                objFromDb.Description = product.Description;
                 objFromDb.CategoryId = product.CategoryId;
-                objFromDb.SubCategoryId = product.SubCategoryId;
-                objFromDb.Stock = product.Stock;
-                objFromDb.DiscountAvailable = product.DiscountAvailable;
-                objFromDb.DiscountPrice = product.DiscountPrice;
-                objFromDb.IsApproved = product.IsApproved;
+                objFromDb.Author = product.Author;
+                objFromDb.CoverTypeId = product.CoverTypeId;
+                
             }
 
             

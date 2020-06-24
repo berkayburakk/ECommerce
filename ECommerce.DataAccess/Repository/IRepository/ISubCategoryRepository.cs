@@ -2,9 +2,9 @@
 
 namespace ECommerce.DataAccess.Repository.IRepository
 {
-    public interface ISubCategoryRepository:IRepository<SubCategory>
+    public interface ISubCategoryRepository:IRepository<CoverType>
     {
-        void Update(SubCategory category);
+        void Update(CoverType category);
 
     }
 }

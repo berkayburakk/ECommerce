@@ -2112,7 +2112,7 @@ pre {
 
 .table-hover tbody tr:hover {
     color: #222;
-    background: linear-gradient(110deg, #D4F9FE 40%, #BDCCFF 60%);
+    background-color: rgba(0, 0, 0, 0.075);
 }
 
 .table-primary,

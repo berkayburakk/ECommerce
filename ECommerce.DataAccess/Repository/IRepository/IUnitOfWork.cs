@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommerce.DataAccess.Repository.IRepository;
+using System;
 
 namespace ECommerce.DataAccess.Repository.IRepository
 {
@@ -7,7 +8,9 @@ namespace ECommerce.DataAccess.Repository.IRepository
         ICategoryRepository Category { get; }
         IProductRepository Product{ get; }
         
-        ISubCategoryRepository SubCategory { get; }
+        ICoverTypeRepository CoverType { get; }
+        ICompanyRepository Company { get; }
+        IApplicationUserRepository ApplicationUser { get; }
        
         void Save();
     }

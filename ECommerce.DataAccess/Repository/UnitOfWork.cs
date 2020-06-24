@@ -1,5 +1,8 @@
-﻿using ECommerce.DataAccess.Data;
+﻿using ECommerce.DataAccess.Repository;
 using ECommerce.DataAccess.Repository.IRepository;
+using ECommerce.DataAccess.Data;
+using System.Runtime.Intrinsics.X86;
+
 
 namespace ECommerce.DataAccess.Repository
 {
@@ -12,12 +15,17 @@ namespace ECommerce.DataAccess.Repository
             _db = db;
             Category = new CategoryRepository(_db);
             Product = new ProductRepository(_db);
-            SubCategory = new SubCategoryRepository(_db);
-            }
+            CoverType = new CoverTypeRepository(_db);
+            Company = new CompanyRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
+        }
         public ICategoryRepository Category { get; private set; }
+        
         public IProductRepository Product{ get; private set; }
-        public ISubCategoryRepository SubCategory { get; private set; }
-       
+        public ICoverTypeRepository CoverType { get; private set; }
+        public ICompanyRepository Company { get; private set; }
+        public IApplicationUserRepository ApplicationUser { get; private set; }
+
         public void Dispose()
         {
             _db.Dispose();
