@@ -1,4 +1,6 @@
 ﻿@using ECommerce.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,39 +33,55 @@
                         </li>
 
 
-                        @if (User.IsInRole(SD.Role_Admin)) 
-                        { 
-                        <li class="dropdown">
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <li class="dropdown">
 
-                            <span href="javascript:void(0)" class="nav-link dropdown-toggle text-white  menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Ürün Yönetimi</span>
-                            <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-white menu " asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriler</a>
-                                <a class="dropdown-item text-white menu " asp-area="Admin" asp-controller="CoverType" asp-action="Index">Kapak Tipleri</a>
-                                <a class="dropdown-item text-white menu" asp-area="Admin" asp-controller="Product" asp-action="Index">Ürünler</a>
+                                <span href="javascript:void(0)" class="nav-link dropdown-toggle text-white  menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Ürün Yönetimi</span>
+                                <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-white menu " asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriler</a>
+                                    <a class="dropdown-item text-white menu " asp-area="Admin" asp-controller="CoverType" asp-action="Index">Kapak Tipleri</a>
+                                    <a class="dropdown-item text-white menu" asp-area="Admin" asp-controller="Product" asp-action="Index">Ürünler</a>
 
-                            </div>
-                        </li>
+                                </div>
+                            </li>
                         }
-                        @if(User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Admin)) { 
-                        <li class="dropdown">
-                            <span href="javascript:void(0)" class="nav-link dropdown-toggle text-white menu " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kullanıcı / Şirket</span>
-                            <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-white menu  " asp-area="" asp-controller="" asp-action="">Kullanıcılar</a>
-                                <a class="dropdown-item text-white  menu" asp-area="Admin" asp-controller="Company" asp-action="Index">Şirketler</a>
-                                <a class="dropdown-item text-white  menu" asp-area="Admin" asp-controller="User" asp-action="Index">Kullanıcılar</a>
+                        @if (User.IsInRole(SD.Role_Employee) || User.IsInRole(SD.Role_Admin))
+                        {
+                            <li class="dropdown">
+                                <span href="javascript:void(0)" class="nav-link dropdown-toggle text-white menu " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kullanıcı / Şirket</span>
+                                <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-white menu  " asp-area="" asp-controller="" asp-action="">Kullanıcılar</a>
+                                    <a class="dropdown-item text-white  menu" asp-area="Admin" asp-controller="Company" asp-action="Index">Şirketler</a>
+                                    <a class="dropdown-item text-white  menu" asp-area="Admin" asp-controller="User" asp-action="Index">Kullanıcılar</a>
 
-                            </div>
-                        </li>
+                                </div>
+                            </li>
                         }
                         <li class="nav-item">
                             <a class="nav-link text-white menu" style="font-size: 15px" role="button" asp-area="" asp-controller="Home" asp-action="Index">Siparişler</a>
                         </li>
-                        <li style="color:white;">
-                            <a asp-area="" asp-controller="" asp-action="" class="nav-link menu">
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32(SD.ssShoppingCart) != null)
+                        {
+                            <li style="color:white;">
+                                <a asp-area="Customer" asp-controller="Cart" asp-action="Index" class="nav-link">
+                                    @{
+                                        var count = HttpContextAccessor.HttpContext.Session.GetInt32(SD.ssShoppingCart);
+                                    }
+                                    <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li style="color:white;">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-shopping-cart"></i> &nbsp; (0)
+                                </a>
+                            </li>
+                        }
 
-                                <i class="fas fa-shopping-cart"></i> &nbsp; (0) @*count eklenecek*@
-                            </a>
-                        </li>
+
 
                         <div class="search-box">
                             <input class="search-txt " type="text" name="" placeholder="Ara" />
@@ -72,9 +90,9 @@
 
                             @*<a asp-area="" asp-controller="" asp-action="" class="nav-link">
 
-                                    <i class="fas fa-search"></i>
+                <i class="fas fa-search"></i>
 
-                                </a>*@
+            </a>*@
 
 
                         </div>

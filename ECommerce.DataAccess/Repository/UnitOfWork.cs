@@ -2,7 +2,7 @@
 using ECommerce.DataAccess.Repository.IRepository;
 using ECommerce.DataAccess.Data;
 using System.Runtime.Intrinsics.X86;
-
+using ECommerce.Models;
 
 namespace ECommerce.DataAccess.Repository
 {
@@ -18,6 +18,10 @@ namespace ECommerce.DataAccess.Repository
             CoverType = new CoverTypeRepository(_db);
             Company = new CompanyRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
+            OrderDetails = new OrderDetailsRepository(_db);
+            OrderHeader = new OrderHeaderRepository(_db);
+            ShoppingCart = new ShoppingCartRepository(_db);
+
         }
         public ICategoryRepository Category { get; private set; }
         
@@ -25,6 +29,9 @@ namespace ECommerce.DataAccess.Repository
         public ICoverTypeRepository CoverType { get; private set; }
         public ICompanyRepository Company { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IShoppingCartRepository ShoppingCart { get; private set; }
+        public IOrderDetailsRepository OrderDetails { get; private set; }
+        public IOrderHeaderRepository OrderHeader { get; private set; }
 
         public void Dispose()
         {

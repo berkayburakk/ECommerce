@@ -48,6 +48,13 @@ namespace ECommerce
                 //Bu kodlarý eklediðimizde access denied mesajý verir herhangi bir normal kullanýcý admin iþini yaparsa.
 
             });
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -67,6 +74,7 @@ namespace ECommerce
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();

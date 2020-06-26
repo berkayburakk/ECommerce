@@ -12,14 +12,15 @@ using Microsoft.EntityFrameworkCore;
 namespace ECommerce.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserController(ApplicationDbContext db)
+        public UserController(ApplicationDbContext db, IUnitOfWork unitOfWork)
         {
             _db = db;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
@@ -34,19 +35,13 @@ namespace ECommerce.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var userList = _db.ApplicationUsers.Include(u=>u.Company).ToList();
+            var userList = _db.ApplicationUsers.Include(u => u.Company).ToList();
             var userRole = _db.UserRoles.ToList();
             var roles = _db.Roles.ToList();
-            foreach(var user in userList)
+            foreach (var user in userList)
             {
-
                 var roleId = userRole.FirstOrDefault(u => u.UserId == user.Id).RoleId;
                 user.Role = roles.FirstOrDefault(u => u.Id == roleId).Name;
-
-                if(roleId == null)
-                {
-
-                }
                 if (user.Company == null)
                 {
                     user.Company = new Company()
@@ -59,27 +54,39 @@ namespace ECommerce.Areas.Admin.Controllers
             return Json(new { data = userList });
         }
 
-      [HttpPost]
-      public IActionResult LockUnlock([FromBody] string id)
+        [HttpPost]
+        public IActionResult LockUnlock([FromBody] string id)
         {
             var objFromDb = _db.ApplicationUsers.FirstOrDefault(u => u.Id == id);
             if (objFromDb == null)
             {
-                return Json(new { success = false, message = "Kilitleme işleminde bir hata oluştu" });
+                return Json(new { success = false, message = "Kilit aç/Kilitlemede hata oluştu" });
             }
-            if(objFromDb.LockoutEnd!=null && objFromDb.LockoutEnd > DateTime.Now)
+            if (objFromDb.LockoutEnd != null && objFromDb.LockoutEnd > DateTime.Now)
             {
-                //bu kullanıcı şuan kilitli, biz bunun kilidin açacağız
+                //kullanıcı şuan kilitli biz onu burda açıyoruz
                 objFromDb.LockoutEnd = DateTime.Now;
             }
             else
             {
+                //kilitlemek için 1000yıl ekliyoruz.
                 objFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
-                // kilitlemek için 1000 yıl ekliyoruz
-
             }
-           _db.SaveChanges();
-            return Json(new { success = true, message = "İşlem başarılı!" });
+            _db.SaveChanges();
+            return Json(new { success = true, message = "Kilit Aç/Kapa işlemi başarıyla gerçekleşti." });
+        }
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var objFromDb = _unitOfWork.ApplicationUser.Get(id);
+            if (objFromDb == null)
+            {
+                return Json(new { success = false, message = "Silme işleminde hata oluştu" });
+            }
+            _unitOfWork.ApplicationUser.Remove(objFromDb);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Silme işlemi başarılı" });
+
         }
 
         #endregion

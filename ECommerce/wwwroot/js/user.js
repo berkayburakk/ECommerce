@@ -30,6 +30,9 @@ function loadDataTable() {
                                 <a onclick=LockUnlock('${data.id}') class="btn btn-danger text-white" style="cursor:pointer; width:100px;">
                                     <i class="fas fa-lock-open"></i>  Kilidi aç
                                 </a>
+                                <a onclick=Delete("/Admin/User/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                    <i class="fas fa-trash-alt"></i> 
+                                </a>
                             </div>
                            `;
                     }
@@ -39,12 +42,19 @@ function loadDataTable() {
                                 <a onclick=LockUnlock('${data.id}') class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="fas fa-lock"></i>  Kilitle
                                 </a>
+                            <a onclick=Delete("/Admin/User/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                    <i class="fas fa-trash-alt"></i> 
+                                </a>
                             </div>
                            `;
                     }
+
                     
-                }, "width": "25%"
+                }, "width": "15%",
+
             }
+            
+
         ]
     });
 }
@@ -67,4 +77,29 @@ function LockUnlock(id) {
                 }
             });
       
+}
+function Delete(url) {
+    swal({
+        title: "Silmek istediğinize emin misiniz??",
+        text: "Verileriniz tekrar geri gelmeyecek!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                type: "DELETE",
+                url: url,
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message);
+                        dataTable.ajax.reload();
+                    }
+                    else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+    });
 }

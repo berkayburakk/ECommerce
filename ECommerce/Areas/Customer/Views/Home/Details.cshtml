@@ -1,0 +1,68 @@
+﻿@model ECommerce.Models.ShoppingCart
+
+    
+        <form method="post">
+            <input hidden asp-for="ProductId" />
+            <div class="container backgroundWhite " style="background: -webkit-linear-gradient(110deg, #C9FFBF 40%, #AEE8E4 60%);">
+                <div class="w3-container ">
+                    <div class="w3-container text-light ml-0 row container" >
+                        <div class="col-12 col-md-6">
+                            <h1 class="text-primary">@Model.Product.Title</h1>
+                            <p class="text-success" style="font-weight:bold; font-size:large">by @Model.Product.Author</p>
+                        </div>
+                        <div class="col-12 col-md-6 text-md-right pt-4">
+                            <span class="badge badge-success pt-2" style="height:30px;">@Model.Product.CoverType.Name</span>
+                            <span class="badge badge-warning pt-2" style="height:30px;">@Model.Product.Category.Name</span>
+                        </div>
+                    </div>
+                    <div class="w3-card-4">
+                        <div class="container rounded p-2">
+                            <div class="row">
+                                <div class="col-8 col-lg-8">
+
+                                    <div class="row pl-5">
+                                        <h5 style="color: maroon; font-weight: bold">ISBN : @Model.Product.ISBN</h5>
+                                    </div>
+
+                                    <div class="row text-center pl-2 "style="color: maroon; font-weight: bold">
+                                        
+                                       
+                                    </div>
+                                    <div class="row text-center pl-2" style="color: maroon; font-weight: bold">
+                                        <div class="p-1 col-2 ">
+                                            <div>Fiyat:</div>
+                                        </div>
+                                        <div class="p-1 col-2" style="margin-left:-70px;">
+                                            <div>@Model.Product.Price.ToString("c")</div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row pl-3" style="font-weight:bold;font-size:18px">
+                                        <p class="text-secondary ">@Html.Raw(Model.Product.Description)</p>
+                                    </div>
+                                    <div class="row pl-2">
+                                        <div class="col-2 text-primary"><h4>Count</h4></div>
+                                        <div class="col-10"><input class="form-control" asp-for="Count" /></div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-3 offset-lg-1 text-center">
+                                    <img src="@Model.Product.ImageUrl" width="100%" class="rounded" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w3-card-4">
+                        <div class="row">
+                            <div class="col-12 col-md-6 pb-1">
+                                <a asp-action="Index" class="btn btn-success form-control  btn btn-primary"style="height:50px;">Listeye geri dön</a>
+
+                            </div>
+                            <div class="col-12 col-md-6 pb-1">
+                                <button type="submit" value="Add to Cart" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">Sepete ekle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>

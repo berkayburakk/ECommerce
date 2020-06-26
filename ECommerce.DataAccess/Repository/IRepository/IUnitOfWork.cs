@@ -11,7 +11,10 @@ namespace ECommerce.DataAccess.Repository.IRepository
         ICoverTypeRepository CoverType { get; }
         ICompanyRepository Company { get; }
         IApplicationUserRepository ApplicationUser { get; }
-       
+        IShoppingCartRepository ShoppingCart { get; }
+        IOrderHeaderRepository OrderHeader { get; }
+        IOrderDetailsRepository OrderDetails { get; }
+
         void Save();
     }
 }
