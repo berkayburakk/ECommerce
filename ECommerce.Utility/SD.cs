@@ -21,17 +21,17 @@ namespace ECommerce.Utility
 
         public const string ssShoppingCart = "Shoping Cart Session";
 
-        public const string StatusPending = "Pending";
-        public const string StatusApproved = "Approved";
-        public const string StatusInProcess = "Processing";
-        public const string StatusShipped = "Shipped";
-        public const string StatusCancelled = "Cancelled";
-        public const string StatusRefunded = "Refunded";
+        public const string StatusPending = "Bekleniyor";
+        public const string StatusApproved = "Onaylandi";
+        public const string StatusInProcess = "İşleme geçildi";
+        public const string StatusShipped = "Kargolandi";
+        public const string StatusCancelled = "İptal Edildi";
+        public const string StatusRefunded = "İade edildi";
 
-        public const string PaymentStatusPending = "Pending";
-        public const string PaymentStatusApproved = "Approved";
-        public const string PaymentStatusDelayedPayment = "ApprovedForDelayedPayment";
-        public const string PaymentStatusRejected = "Rejected";
+        public const string PaymentStatusPending = "Bekleniyor";
+        public const string PaymentStatusApproved = "Onaylandı";
+        public const string PaymentStatusDelayedPayment = "Geciken Odeme onaylandi";
+        public const string PaymentStatusRejected = "Reddedildi";
 
         public static string ConvertToRawHtml(string source)
         {

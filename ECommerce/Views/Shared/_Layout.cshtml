@@ -51,7 +51,6 @@
                             <li class="dropdown">
                                 <span href="javascript:void(0)" class="nav-link dropdown-toggle text-white menu " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kullanıcı / Şirket</span>
                                 <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-white menu  " asp-area="" asp-controller="" asp-action="">Kullanıcılar</a>
                                     <a class="dropdown-item text-white  menu" asp-area="Admin" asp-controller="Company" asp-action="Index">Şirketler</a>
                                     <a class="dropdown-item text-white  menu" asp-area="Admin" asp-controller="User" asp-action="Index">Kullanıcılar</a>
 
@@ -59,7 +58,7 @@
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link text-white menu" style="font-size: 15px" role="button" asp-area="" asp-controller="Home" asp-action="Index">Siparişler</a>
+                            <a class="nav-link text-white menu" asp-area="Admin" asp-controller="Order" asp-action="Index" style="font-size: 15px" role="button">Siparişler</a>
                         </li>
                         @if (HttpContextAccessor.HttpContext.Session.GetInt32(SD.ssShoppingCart) != null)
                         {
@@ -82,20 +81,16 @@
                         }
 
 
+                        @*<form method="post">
+                            <div class="search-box">
+                                <input class="search-txt" type="text" name="" placeholder="Ara" />
 
-                        <div class="search-box">
-                            <input class="search-txt " type="text" name="" placeholder="Ara" />
-
-                            <i class="fas fa-search"></i>
-
-                            @*<a asp-area="" asp-controller="" asp-action="" class="nav-link">
-
-                <i class="fas fa-search"></i>
-
-            </a>*@
+                                <i class="fas fa-search"></i>
+                        </form>*@
+                        
 
 
-                        </div>
+</div>
 
                     </ul>
                 </div>
